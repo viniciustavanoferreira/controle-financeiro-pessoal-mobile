@@ -28,6 +28,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
+void validateAndSubmit() async {
+    print('#CFPLOG: Button was pressed.');
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -49,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Color(0xFFC0CCDA),
             )),
       ),
-      // validator: (val) => val.isEmpty ? 'Email não pode ser vazio.' : null,
+      validator: (val) => val.isEmpty ? 'Email não pode ser vazio.' : null
       // onSaved: (val) => _email = val,
     );
 
@@ -71,13 +75,13 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Color(0xFFC0CCDA),
             )),
       ),
-      // validator: (val) => val.isEmpty ? 'Email não pode ser vazio.' : null,
-      // onSaved: (val) => _email = val,
+      validator: (val) => val.isEmpty ? 'Senha não pode ser vazia.' : null
+      // onSaved: (val) => _password = val,
     );
 
   final loginButton = Material(
       child: InkWell(
-        // onTap: validateAndSubmit,
+        onTap: validateAndSubmit,
         child: Container(
           height: 50.0,
           decoration: BoxDecoration(
@@ -94,7 +98,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ],
             borderRadius: BorderRadius.circular(5.0),
-            color: Colors.white,
+            color: Colors.blue,
             //gradient: LinearGradient(
             //  begin: Alignment.topLeft,
             //  end: Alignment.bottomRight,
