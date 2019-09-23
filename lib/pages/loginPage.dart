@@ -1,6 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(MyApp());
+
+String username='';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -28,14 +33,48 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
 
-void validateAndSubmit() async {
+  TextEditingController user=new TextEditingController();
+  TextEditingController pass=new TextEditingController();
+
+  void _validateAndSubmit() async {
     print('#CFPLOG: Button was pressed.');
+    _login();
+  }
+
+  Future<List> _login() async {
+    final response = await http.post("http://127.0.0.1/controle_financeiro_pessoal/login.php", body: {
+      "username": user.text.toUpperCase(),
+      "password": pass.text.toUpperCase(),
+    });
+
+    var datauser = json.decode(response.body);
+
+    if(datauser.length==0){
+      setState(() {
+            print('#CFPLOG: Login - Fail.');    
+          });
+    }else{
+      if(datauser[0]['DESCROLE']=='ADM'){
+        //  Navigator.pushReplacementNamed(context, '/AdminPage');
+        print('#CFPLOG: Login - Success - ADM.');    
+      // }else if(datauser[0]['level']=='member'){
+        // Navigator.pushReplacementNamed(context, '/MemberPage');
+      }
+
+      setState(() {
+            username= datauser[0]['username'];
+          });
+
+    }
+
+    return datauser;
   }
 
   @override
   Widget build(BuildContext context) {
 
     final userField = TextFormField(
+      controller: user,
       key: new Key('email'),
       keyboardType: TextInputType.emailAddress,
       style: TextStyle(color: Colors.white),
@@ -57,7 +96,8 @@ void validateAndSubmit() async {
       // onSaved: (val) => _email = val,
     );
 
-    final passField = TextFormField(  
+    final passField = TextFormField( 
+      controller: pass, 
       key: new Key('password'),
       obscureText: true,
       style: TextStyle(color: Colors.white),
@@ -81,7 +121,7 @@ void validateAndSubmit() async {
 
   final loginButton = Material(
       child: InkWell(
-        onTap: validateAndSubmit,
+        onTap: _validateAndSubmit,
         child: Container(
           height: 50.0,
           decoration: BoxDecoration(
