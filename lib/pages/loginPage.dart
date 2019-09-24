@@ -79,13 +79,13 @@ class _MyHomePageState extends State<MyHomePage> {
       controller: user,
       key: new Key('email'),
       keyboardType: TextInputType.emailAddress,
-      style: TextStyle(color: Colors.white),
+      style: TextStyle(color: Colors.blue),
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 20.0),
         hintText: "email",
         hintStyle: TextStyle(
-          color: Color(0x50C0CCDA),
+          color: Color(0xFFC0CCDA),
         ),
         prefixIcon: Container(
             margin: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
@@ -102,13 +102,13 @@ class _MyHomePageState extends State<MyHomePage> {
       controller: pass, 
       key: new Key('password'),
       obscureText: true,
-      style: TextStyle(color: Colors.white),
+      style: TextStyle(color: Colors.blue),
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 20.0),
         hintText: "senha",
         hintStyle: TextStyle(
-          color: Color(0x50C0CCDA),
+          color: Color(0xFFC0CCDA),
         ),
         prefixIcon: Container(
             margin: EdgeInsets.fromLTRB(0.0, 0.0, 10.0, 0.0),
@@ -151,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text(
               "LOGIN",
               style: TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontSize: 18,
               ),
             ),
