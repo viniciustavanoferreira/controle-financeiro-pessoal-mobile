@@ -38,11 +38,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void _validateAndSubmit() async {
     print('#CFPLOG: Button was pressed.');
-    _login();
+    Future<List> futureResponse =_login();
+    futureResponse.then((value) => print(value))
+                  .catchError((error) => print('#CFPLOG: REST API - Error - LOGIN.'));
   }
 
   Future<List> _login() async {
-    final response = await http.post("http://127.0.0.1/controle_financeiro_pessoal/login.php", body: {
+    final response = await http.post("http://10.0.2.2/controle_financeiro_pessoal/login.php", body: {
       "username": user.text.toUpperCase(),
       "password": pass.text.toUpperCase(),
     });
